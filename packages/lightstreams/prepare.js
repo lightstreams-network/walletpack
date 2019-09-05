@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const rimraf = require("rimraf");
+const rimraf = require('rimraf');
 
 const paths = __dirname.split(path.sep);
 const parent = paths[paths.length-2];

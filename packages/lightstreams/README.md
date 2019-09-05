@@ -1,11 +1,11 @@
-# `ethereum`
+# `lightstreams`
 
 > TODO: description
 
 ## Usage
 
 ```
-const ethereum = require('ethereum');
+const lightstreams = require('./lightstreams');
 
 // TODO: DEMONSTRATE API
 ```
