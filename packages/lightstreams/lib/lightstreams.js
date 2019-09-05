@@ -178,10 +178,10 @@ export default class Lightstreams extends Plugin {
 
 	async transfer({account, to, amount, token, promptForSignature = true}){
 		const {contract, symbol} = token;
-		const isEth = token.uniqueWithChain() === this.defaultToken().uniqueWithChain();
+		const isPht = token.uniqueWithChain() === this.defaultToken().uniqueWithChain();
 		return new Promise(async (resolve, reject) => {
 			const wallet = new ScatterEthereumWallet(account, async (transaction, callback) => {
-				const payload = { transaction, blockchain:Blockchains.PHT, network:account.network(), requiredFields:{}, abi:isEth ? null : erc20abi };
+				const payload = { transaction, blockchain:Blockchains.PHT, network:account.network(), requiredFields:{}, abi:isPht ? null : erc20abi };
 				const signatures = promptForSignature
 					? await this.signerWithPopup(payload, account, x => finished(x), token)
 					: await SigningService.sign(account.network(), payload, account.publicKey, false, false);
@@ -198,7 +198,7 @@ export default class Lightstreams extends Plugin {
 			const [web3, engine] = getCachedInstance(account.network(), wallet);
 
 			try {
-				if(isEth){
+				if(isPht){
 					const value = web3util.utils.toWei(amount.toString());
 					web3.eth.sendTransaction({from:account.publicKey, to, value})
 						.on('transactionHash', transactionHash => finished({transactionHash}))
